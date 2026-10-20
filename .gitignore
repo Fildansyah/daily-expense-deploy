@@ -1,0 +1,10 @@
+# Environment (rahasia) — jangan di-commit
+.env
+.env.*
+!.env.example
+
+# Repo aplikasi dikelola terpisah (masing-masing punya .git sendiri)
+daily-expense-backend/
+daily-expense-frontend/
+
+.commandcode/
