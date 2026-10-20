@@ -23,6 +23,9 @@ services:
   api:
     build:
       context: ./daily-expense-backend
+    # Image di-build oleh GitHub Actions lalu di-push ke GHCR.
+    # Lokal: docker compose up --build | VPS: docker compose pull
+    image: ghcr.io/fildansyah/daily-expense-api
     container_name: expense-api
     restart: always
     environment:
@@ -46,7 +49,8 @@ services:
       context: ./daily-expense-frontend
       args:
         # NEXT_PUBLIC_* di-inline saat build, jadi harus lewat build args
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000/api}
+    image: ghcr.io/fildansyah/daily-expense-web
     container_name: expense-web
     restart: always
     ports:
