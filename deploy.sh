@@ -25,6 +25,10 @@ fi
 
 echo "==> Pull repo"
 git pull
+# .env backend bersifat environment-specific dan bisa berubah lokal di VPS.
+# Reset dulu agar tidak menghalangi git pull. Runtime API memakai env dari
+# docker-compose, dan migrasi memakai DB_URL yang dibentuk di bawah.
+git -C daily-expense-backend checkout -- .env 2>/dev/null || true
 git -C daily-expense-backend pull
 git -C daily-expense-frontend pull
 
